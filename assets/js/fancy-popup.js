@@ -18,6 +18,7 @@
         isOk = testDataUrl(element);
         if (isOk) {
             bindEvents(element);
+            element.addClass('fancy-popup-clickable');
         }
     };
 
@@ -28,6 +29,13 @@
     var loadPage = function (url) {
         var modalBody = getModalBody();
         modalBody.load(url);
+        modalBody.niceScroll({
+            cursorwidth: "10px",
+            cursorborderradius: "0px",
+            cursorborder: "1px solid" + settings.scrollbarcolor,
+            cursorcolor: settings.scrollbarcolor,
+            autohidemode: false
+        });
     };
 
     var createModal = function (element) {
@@ -82,7 +90,9 @@
     };
 
     $.fn.fancyPopup = function (options) {
-        settings = $.extend({}, options);
+        settings = $.extend({
+            scrollbarcolor: '#424242'
+        }, options);
 
         return this.each(function () {
             isOk = false;
